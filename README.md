@@ -1,3 +1,3 @@
 # movies-explorer-api
 
-Ссылка: https://diploma.algrigorovich.nomoredomains.xyz/
+Ссылка: https://api.algrigorovich.nomoredomains.xyz
