@@ -32,7 +32,7 @@ const createUser = (req, res, next) => {
       });
     })
     .catch((err) => {
-      if (err.name === 'ValidationError' || err.name === 'CastError') {
+      if (err.name === 'ValidationError') {
         throw new BadRequestError(wrongData);
       } else if (err.name === 'MongoError' || err.code === MONGO_ERROR) {
         throw new DuplicateError(emailDuplicate);
@@ -55,9 +55,9 @@ const updateUserInfo = (req, res, next) => {
       return res.send(user);
     })
     .catch((err) => {
-      if (err.name === 'ValidationError' || err.name === 'CastError') {
+      if (err.name === 'ValidationError') {
         throw new BadRequestError(wrongData);
-      } else if (err.name === 'MongoError') {
+      } else if (err.name === 'MongoError' || err.code === MONGO_ERROR) {
         throw new DuplicateError(emailDuplicate);
       } else {
         next(err);
@@ -76,7 +76,7 @@ const getUserInfo = (req, res, next) => {
       return res.send(user);
     }))
     .catch((err) => {
-      if (err.name === 'ValidationError' || err.name === 'CastError') {
+      if (err.name === 'ValidationError') {
         throw new BadRequestError(wrongData);
       } else {
         next(err);

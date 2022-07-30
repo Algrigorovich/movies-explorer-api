@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const urlRegexp = require('../constants/regexp-url');
+const isURL = require('validator/lib/isURL');
 const { wrongUrlFormat } = require('../constants/messages');
 
 const movieSchema = new mongoose.Schema({
@@ -27,15 +27,16 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (v) => urlRegexp.test(v),
+      validator: (v) => isURL(v),
       message: wrongUrlFormat,
     },
+
   },
-  trailer: {
+  trailerLink: {
     type: String,
     required: true,
     validate: {
-      validator: (v) => urlRegexp.test(v),
+      validator: (v) => isURL(v),
       message: wrongUrlFormat,
     },
   },
@@ -43,7 +44,7 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (v) => urlRegexp.test(v),
+      validator: (v) => isURL(v),
       message: wrongUrlFormat,
     },
   },

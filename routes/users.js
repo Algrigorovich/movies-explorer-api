@@ -1,4 +1,4 @@
-const usersRouter = require('express').Router();
+const router = require('express').Router();
 const { userValidator } = require('../middlewares/joi-schemas');
 
 const {
@@ -6,7 +6,7 @@ const {
   getUserInfo,
 } = require('../controllers/users');
 
-usersRouter.get('/me', getUserInfo);
-usersRouter.patch('/me', userValidator, updateUserInfo);
+router.get('/me', getUserInfo);
+router.patch('/me', userValidator, updateUserInfo);
 
-module.exports = usersRouter;
+module.exports = router;

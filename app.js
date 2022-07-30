@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const cors = require('cors');
 const { errors } = require('celebrate');
-const router = require('./routes/index');
+const router = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const limiter = require('./middlewares/limiter');
 const handleError = require('./middlewares/handle-error');
@@ -31,8 +31,7 @@ app.use(router);
 app.use(errorLogger);
 app.use(errors());
 app.use((req, res, next) => {
-  Promise.reject(new NotFoundError(urlNotFound))
-    .catch(next);
+  next(new NotFoundError(urlNotFound));
 });
 app.use(handleError);
-app.listen(PORT, () => { });
+app.listen(PORT);

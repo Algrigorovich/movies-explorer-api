@@ -6,7 +6,8 @@ const authRouter = require('./auth');
 const auth = require('../middlewares/auth');
 
 router.use('/', authRouter);
-router.use('/users', auth, usersRouter);
-router.use('/movies', auth, moviesRouter);
+router.use('/', auth);
+router.use('/users', usersRouter);
+router.use('/movies', moviesRouter);
 
 module.exports = router;
