@@ -34,7 +34,7 @@ const createUser = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         throw new BadRequestError(wrongData);
-      } else if (err.name === 'MongoError' || err.code === MONGO_ERROR) {
+      } else if (err.code === MONGO_ERROR) {
         throw new DuplicateError(emailDuplicate);
       } else {
         next(err);
@@ -57,7 +57,7 @@ const updateUserInfo = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         throw new BadRequestError(wrongData);
-      } else if (err.name === 'MongoError' || err.code === MONGO_ERROR) {
+      } else if (err.code === MONGO_ERROR) {
         throw new DuplicateError(emailDuplicate);
       } else {
         next(err);
