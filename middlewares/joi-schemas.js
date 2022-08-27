@@ -1,5 +1,5 @@
 const { celebrate, Joi } = require('celebrate');
-const urlRegexp = require('../constants/regexp-url');
+const validator = require('validator');
 
 const paramsValidator = celebrate({
   params: Joi.object().keys({
@@ -29,9 +29,24 @@ const movieCreatingValidator = celebrate({
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
-    image: Joi.string().required().pattern(urlRegexp),
-    trailerLink: Joi.string().required().pattern(urlRegexp),
-    thumbnail: Joi.string().required().pattern(urlRegexp),
+    image: Joi.string().required().custom((value, helpers) => {
+      if (validator.isURL(value)) {
+        return value;
+      }
+      return helpers.message('Поле "image" должно быть валидным url-адресом');
+    }),
+    trailerLink: Joi.string().required().custom((value, helpers) => {
+      if (validator.isURL(value)) {
+        return value;
+      }
+      return helpers.message('Поле "trailerLink" должно быть валидным url-адресом');
+    }),
+    thumbnail: Joi.string().required().custom((value, helpers) => {
+      if (validator.isURL(value)) {
+        return value;
+      }
+      return helpers.message('Поле "thumbnail" должно быть валидным url-адресом');
+    }),
     movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
