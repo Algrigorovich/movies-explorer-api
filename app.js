@@ -12,7 +12,7 @@ const limiter = require('./middlewares/limiter');
 const handleError = require('./middlewares/handle-error');
 const { dbConnectDev, corsOptions } = require('./constants/config');
 
-const { PORT = 3000, DB_CONN, NODE_ENV } = process.env;
+const { PORT = 3001, DB_CONN, NODE_ENV } = process.env;
 const app = express();
 
 app.use(cookieParser());
