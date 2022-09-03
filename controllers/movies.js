@@ -9,8 +9,14 @@ const {
 } = require('../constants/messages');
 
 const getMovies = (req, res, next) => {
+  const userId = req.user._id;
   Movie.find({})
-    .then((movies) => res.send(movies))
+    .then((m) => {
+      const ownersFilms = m.filter(
+        (movie) => String(movie.owner) === userId,
+      );
+      res.send(ownersFilms);
+    })
     .catch(next);
 };
 
